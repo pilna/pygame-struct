@@ -1,11 +1,11 @@
 from src.views.ViewsManager import ViewsManager
-from src.settings.Globals import Globals
+from os import getenv
 import pygame
 
 class Game:
 
     def __init__(self) -> None:
-        self.screen = pygame.display.set_mode((Globals.screen_width, Globals.screen_height))
+        self.screen = pygame.display.set_mode((int(getenv("SCREEN_WIDTH")), int(getenv("SCREEN_HEIGHT"))))
         self.clock = pygame.time.Clock()
         self.views_manager = ViewsManager()
         self.is_running = True

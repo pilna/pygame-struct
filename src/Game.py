@@ -1,4 +1,5 @@
 from src.views.ViewsManager import ViewsManager
+from src.entity.Animated import Player
 from os import getenv
 import pygame
 
@@ -11,6 +12,7 @@ class Game:
         self.is_running = True
 
     def run(self) -> None:
+        print(Player().get_image("run"))
         while self.is_running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

@@ -3,7 +3,8 @@ import pygame
 
 class Animated(type):
 
-    def __init__(cls, name, bases, dct):
+    def __init__(cls, name, attrs, dct):
+        super(Animated, cls).__init__(name, attrs, dct)
         path_entity_animation = f"assets/img/{cls.__name__}"
         animations_img = {}
 
@@ -18,7 +19,7 @@ class Animated(type):
                 animations_img["default"] = [pygame.image.load(path.join(path_entity_animation, file_name))]
         
         cls.animations = animations_img
-        setattr(cls, "get_image", Animated.get_image)
+        cls.get_image = Animated.get_image
 
 
     def get_image(self, animation_name, animation_speed=1):
@@ -27,7 +28,7 @@ class Animated(type):
 
         self.animation_index += animation_speed
         
-        return self.__class__.animations[animation_name][int(self.animation_index) % len(self.__class__.animations[animation_name])]
+        return type(self).animations[animation_name][int(self.animation_index) % len(type(self).animations[animation_name])]
 
             
 
